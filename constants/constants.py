@@ -1,3 +1,2 @@
 GENERATED_FOLDER = "generated"
-INPUTS_FOLDER = "inputs"
 PORT = 8000
