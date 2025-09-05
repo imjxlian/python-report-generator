@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Quill -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+        <!-- My styles -->
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+        <title>Python Report Generator</title>
+    </head>
+    <body>
+        <h1 class="title">Python Report Generator</h1>
+        <p class="p">Generate reports from your data using Python.</p>
+
+        <!-- Upload section -->
+        <label for="data">Select Markdown file:</label>
+        <input type="file" id="data" name="data" />
+
+        <div class="buttonContainer">
+            <button id="convertBtn">Convert to HTML</button>
+            <button id="exportPdfBtn">Export as PDF</button>
+        </div>
+
+        <h2 class="sub-title">HTML Editor</h2>
+        <select
+            id="blockLanguageSelector"
+            style="position: absolute; display: none; z-index: 1000"
+        >
+            <option value="auto">Auto (default)</option>
+            <option value="solidity">Solidity</option>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="plain">Plain</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="sql">SQL</option>
+        </select>
+
+        <div id="editor"></div>
+
+        <script src="{{ url_for('static', filename='js/quill_init.js') }}"></script>
+    </body>
+</html>

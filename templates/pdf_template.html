@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <style>
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 100; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Thin.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 100; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-ThinItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 200; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-ExtraLight.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 200; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-ExtraLightItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 300; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Light.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 300; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-LightItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Regular.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 400; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Italic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Medium.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 500; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-MediumItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-SemiBold.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 600; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-SemiBoldItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 700; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Bold.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 700; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-BoldItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 800; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-ExtraBold.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 800; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-ExtraBoldItalic.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: normal; font-weight: 900; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-Black.woff2") format("woff2"); }
+            @font-face { font-family: "Inter"; font-style: italic; font-weight: 900; font-display: swap; src: url("file:///Users/julian/Documents/Programmation/python-report-generator-pandoc/static/fonts/Inter-BlackItalic.woff2") format("woff2"); }
+
+                /* ==========================
+                   Styles généraux
+                   ========================== */
+                @page {
+                    background-color: rgb(7, 7, 8);
+                    size: A4;
+                    margin: 20mm 20mm 25mm 20mm;
+
+                    @bottom-center {
+                        content: counter(page) " / " counter(pages);
+                        font-size: 12px;
+                        font-family: 'Inter', sans-serif;
+                        color: rgb(199, 199, 209);
+                    }
+                }
+
+                body {
+                    font-family: 'Inter', sans-serif;
+                    padding: 20px;
+                    line-height: 1.5;
+                    color: rgb(199, 199, 209);
+                    font-weight: 500;
+                }
+
+                h1:not(:first-of-type) {
+                    page-break-before: always;  /* Add a page break before each h1 except the first one */
+                }
+
+                h1 { font-size: 28px; margin-bottom: 12px; color: white; }
+                h2 { font-size: 24px; margin-bottom: 10px; color: white; }
+                h3 { font-size: 20px; margin-bottom: 8px; color: white; }
+                h4 { font-size: 18px; margin-bottom: 6px; color: white; }
+                h5 { font-size: 16px; margin-bottom: 4px; color: white; }
+                h6 { font-size: 14px; margin-bottom: 2px; color: white; }
+
+                p { margin-bottom: 8px; }
+
+                a { color: inherit; }
+
+                /* ==========================
+                   Listes
+                   ========================== */
+                ul, ol {
+                    margin: 8px 0 8px 24px;
+                    padding: 0;
+                }
+                li { margin-bottom: 4px; }
+
+                /* ==========================
+                   Blockquotes
+                   ========================== */
+                blockquote {
+                    border-left: 4px solid #ccc;
+                    padding-left: 12px;
+                    color: #555;
+                    margin: 8px 0;
+                }
+
+                /* ==========================
+                   Code et préformatage
+                   ========================== */
+                pre, .ql-code-block, .codehilite {
+                    white-space: pre-wrap;
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    padding: 0.6em 1em;
+                    font-family: monospace;
+                    font-size: 1em;
+                    margin: 8px 0;
+                    border: 0.5px solid rgb(85, 85, 85);
+                }
+                code {
+                    padding: 2px 4px;
+                    border-radius: 3px;
+                    font-family: 'Courier New', monospace;
+                }
+
+                /* ==========================
+                   Tables
+                   ========================== */
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin: 12px 0;
+                }
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 6px 10px;
+                }
+                th {
+                    background: #f0f0f0;
+                    text-align: left;
+                }
+
+                /* ==========================
+                   Horizontal rules
+                   ========================== */
+                hr {
+                    border: none;
+                    border-top: 1px solid #ccc;
+                    margin: 12px 0;
+                }
+
+                /* ==========================
+                   Images
+                   ========================== */
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                /* ==========================
+                   CSS Pygments pour code syntaxé
+                   ========================== */
+                {{ pygments_css|safe }}
+
+                .highlight {
+                    background: transparent !important;
+                }
+
+                .highlight pre {
+                    white-space: pre-wrap;       /* conserve l'indentation mais wrap les lignes */
+                    word-wrap: break-word;       /* support legacy */
+                    overflow-wrap: break-word;   /* CSS moderne */
+                }
+
+                .highlight pre span {
+                    display: inline-block;       /* chaque token devient un bloc inline, breakable */
+                    word-break: break-all;      /* force le break à l'intérieur du token */
+                }
+        </style>
+    </head>
+    <body>
+        {{ content|safe }}
+    </body>
+</html>
