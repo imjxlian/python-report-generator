@@ -1,0 +1,18 @@
+services:
+  python-report:
+    build: .
+    container_name: python-report-generator
+    restart: always
+    environment:
+      - PORT=8000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.python-report.rule=Host(`python-report-generator.jxlian.cloud`)"
+      - "traefik.http.routers.python-report.entrypoints=websecure"
+      - "traefik.http.routers.python-report.tls.certresolver=le"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
